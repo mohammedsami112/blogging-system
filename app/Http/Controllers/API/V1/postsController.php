@@ -11,9 +11,9 @@ use Illuminate\Support\Facades\Validator;
 
 class postsController extends Controller {
     use createPostSummary;
-    public function index() {
+    public function index(Request $request) {
         $posts = Post::with(['writer' => function($query) {$query->select('name', 'id');}, 'category' => function($query) {$query->select('name', 'id');}])->get();
-
+        $posts = collect($posts)->paginate(10);
         return $this->sendSuccess('All Posts', $posts);
     }
 

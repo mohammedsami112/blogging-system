@@ -44,15 +44,12 @@ Route::group(['prefix' => 'v1'], function() {
             Route::post('/update', [postsController::class, 'updatePost']);
             Route::post('/', [postsController::class, 'index']);
             Route::post('/{postId}', [postsController::class, 'getPost']);
-
             // Comments
             Route::group(['prefix' => 'comments'], function() {
                 Route::get('/{postId}', [postsController::class, 'getComments']);
                 Route::post('create', [postsController::class, 'createComment']);
             });
-
         });
-
     });
 
 
